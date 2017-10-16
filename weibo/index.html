@@ -1,0 +1,75 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>微博测试</title>
+<link rel="icon" href="../HSY.ico" type="image/png">
+<link href="style/weibo.css" rel="stylesheet" type="text/css" />
+    <script src="js/vue.js"></script>
+    <script src="js/vue-resource.js"></script>
+</head>
+<body>
+<div class="znsArea">
+<!--留言-->
+     <div class="takeComment">
+        <textarea name="textarea" class="takeTextField" id="tijiaoText" v-model="t1"></textarea>
+        <div class="takeSbmComment">
+            <input type="button" class="inputs" value="" @click="add()"/>
+            <span>(可按 Enter 回复)</span>
+        </div>
+    </div>
+<!--已留-->
+    <div class="commentOn">
+        <div class="noContent" v-show="mesData.length==0">暂无留言</div>
+        <div class="messList">
+        	<div class="reply" v-for="item in mesData">
+                <p class="replyContent">{{item.content}}</p>
+                <p class="operation">
+                    <span class="replyTime">{{item.time}}</span>
+                    <span class="handle">
+                    	<a href="javascript:;" class="top">{{item.acc}}</a>
+                        <a href="javascript:;" class="down_icon">{{item.ref}}</a>
+                        <a href="javascript:;" class="cut">删除</a>
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="page" v-show="mesData.length!=0">
+        	<a href="javascript:;" class="active">1</a>
+        	<a href="javascript:;">2</a>
+        	<a href="javascript:;">3</a>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+	var URL='php/weibo.php'
+	new Vue({
+		el:'.znsArea',
+		data:{
+			mesData:[
+				{content:'xxx',time:'2017',acc:'1',ref:'2',id:'0'},
+				{content:'xxx',time:'2017',acc:'1',ref:'2',id:'1'},
+				
+			],
+			t1:'0'
+		},
+		methods:{
+			add:function(){
+				this.$http({
+					url:'php/weibo.php',
+					data:{
+						act:'add',
+						content:this.t1
+					}
+				}).then(function(res){
+					alert(res.data)
+				},function(){
+					alert('出现错误！')
+				})
+			}
+			
+		}
+	})
+</script>
+</html>
