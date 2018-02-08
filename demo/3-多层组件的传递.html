@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <parten :imgs="img" :titles="title"></parten>
+    </div>
+
+    <!--1.第一个组件-->
+    <template id="h_img">
+        <img :src="imgsrc" alt="">
+    </template>
+    <!--2.第二个组件-->
+    <template id="h_title">
+        <h2>{{imgtitle}}</h2>
+    </template>
+
+    <template id="h_parten">
+        <div>
+            <one :imgsrc="imgs" ></one>
+            <tow :imgtitle="titles"></tow>
+        </div>
+    </template>
+</body>
+<script src="js/vue.js"></script>
+<script>
+//    1.组件的实例，由于是字组件所以要实例化的处理
+    let child1 = Vue.extend({
+        template:'#h_img',
+        props:['imgsrc']
+    });
+    let child2 = Vue.extend({
+        template:'#h_title',
+        props:['imgtitle']
+    });
+
+    //2.父亲的处理  把俩个组件包含起来就好了
+    Vue.component('parten',{
+        template:'#h_parten',
+        props:['imgs','titles'],
+        components:{
+            'one':child1,
+            'tow':child2,
+        }
+    });
+    //在处理的时候一定要注意#class或者id的处理
+    new Vue({
+        el:'#app',
+        data:{
+            img:'img/1.jpg',
+            title:'发发发按揭房大战'
+        }
+    })
+</script>
+</html>

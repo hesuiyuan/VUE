@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<style>
+    .one{
+        width: 100px;
+        height: 50px;
+        background-color: #369;
+        color: #fff;
+        border:1px solid #00ee00;
+    }
+    .one>span{
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
+<body>
+<div id="app">
+    <b-component></b-component>
+    <b-component></b-component>
+    <b-component></b-component>
+</div>
+</body>
+<script>
+
+    //2.激活
+    Vue.component('b-component', {
+        template:'<div class="one">' +
+        '<span>我不知道为什么</span>' +
+        '</div> '
+    })
+
+    new Vue({
+        el: '#app',
+    });
+</script>
+</html>

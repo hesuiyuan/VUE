@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<style>
+
+</style>
+<body>
+<div id="app">
+    <partent></partent>
+</div>
+</body>
+<script>
+        //1.构造组件
+        let child1=Vue.extend({
+            template:'<img src="http://upload.jianshu.io/admin_banners/web_images/4158/37789f77043e154c7cc58c07546b95e5dd040fa8.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/1250/h/540">'
+        });
+        let child2=Vue.extend({
+            template:'<p>我不知道为什么！</p>'
+        });
+        //2.我们需要进行父亲的分析和应用
+        Vue.component('partent',{
+            components:{
+                'one':child1,
+                'ones':child2
+            },
+            template:'<div>' +
+            '<one></one>' +
+            '<ones></ones>' +
+            '</div>'
+        });
+        new Vue({
+            el: '#app',
+        });
+</script>
+</html>

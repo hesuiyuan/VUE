@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <partent :title="title" :imgsrc="imgsrc"></partent>
+    </div>
+
+
+    <template id="child1">
+        <img :src="imgsrc" alt="">
+    </template>
+
+    <template id="child2">
+        <h1>{{titles}}</h1>
+    </template>
+
+    <template id="partent">
+        <div>
+            <child1 :imgsrc="imgsrc" ></child1>
+            <child2 :titles="title"></child2>
+        </div>
+    </template>
+</body>
+<script>
+   let child1 = Vue.extend({
+       template:'#child1',
+       props:['imgsrc']
+   });
+   let child2 = Vue.extend({
+       template:'#child2',
+       props:['titles']
+   });
+
+
+     Vue.component('partent',{
+         props:['title','imgsrc'],
+         components: {
+             'child1': child1,
+             'child2': child2
+         },
+         template:'#partent'
+
+     })
+
+    new Vue({
+        el:'#app',
+        data:{
+            title:'我不知道',
+            imgsrc:'img/1.jpg'
+        }
+    });
+</script>
+</html>
