@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/vue-router.js"></script>
+    <script src="js/vue.js"></script>
+    <style>
+        body{
+            background-color: #e8e8e8;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+           <div class="container-fluid">
+               <div class="row">
+                   <div class="col-xs-8 col-xs-offset-2">
+                       <h1>IT学院</h1>
+                   </div>
+               </div>
+           </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2 col-xs-offset-2">
+                    <div class="list-group">
+                        <router-link class="list-group-item" :to="{name:'h5'}">HTML5学习</router-link>
+                        <router-link class="list-group-item" :to="{name:'js'}">Js的学习</router-link>
+                        <router-link class="list-group-item" :to="{name:'css'}">css的学习</router-link>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <router-view></router-view>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--1.在处理路由的时候我们首先对模板进行一系列的分析-->
+    <template id="h5">
+        <h2>HTML5学习</h2>
+        <p>html5是我们必须学习的基础语言，我们必须学好我们的基础语言！</p>
+    </template>
+
+    <template id="js">
+        <h2>Js的学习</h2>
+        <p>在操作DEM中必须使用的语言</p>
+    </template>
+
+    <template id="css">
+        <h2>css的学习</h2>
+        <p>css是非常强大的语言</p>
+    </template>
+</body>
+<script>
+//    1.定义组件
+    const H5={
+        template:'#h5'
+    };
+    const Js={
+        template:'#js'
+    };
+    const Css={
+        template:'#css'
+    };
+//组件写出来一定要对其进行一系列的处理，代码的实现我们需要对组件定义
+
+//    2.定义路由
+    const routes  =[
+        {path:'/h5',component:H5,name:'h5'},
+        {path:'/js',component:Js,name:'js'},
+        {path:'/css',component:Css,name:'css'}
+
+    ];
+//3.实例化
+    const route = new VueRouter({
+        routes :routes
+    });
+
+    new Vue({
+        route
+        }).$mount('#app');
+</script>
+</html>
